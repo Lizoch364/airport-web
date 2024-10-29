@@ -5,13 +5,14 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "airline")
+@Table(name = "airlines")
 public class Airline extends BaseEntity {
   private String name;
 
   public Airline(String name) {
     this.name = name;
   }
+
   protected Airline() {}
 
   @Column(name = "name")

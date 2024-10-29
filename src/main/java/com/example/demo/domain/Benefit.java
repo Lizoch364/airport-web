@@ -5,16 +5,16 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "benefit")
+@Table(name = "benefits")
 public class Benefit extends BaseEntity{
   private String name;
-  private int index;
+  private int discountMultiplier;
 
   public Benefit(String name, int index) {
     this.name = name;
-    this.index = index;
+    this.discountMultiplier = index;
   }
-  
+
   protected Benefit() {}
 
   @Column(name = "name")
@@ -22,16 +22,16 @@ public class Benefit extends BaseEntity{
     return name;
   }
 
-  @Column(name = "index")
-  public int getIndex() {
-    return index;
+  @Column(name = "discount_multiplier")
+  public int getDiscountMultiplier() {
+    return discountMultiplier;
   }
 
   public void setName(String name) {
     this.name = name;
   }
 
-  public void setIndex(int index) {
-    this.index = index;
+  public void setDiscountMultiplier(int index) {
+    this.discountMultiplier = index;
   }
 }

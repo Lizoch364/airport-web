@@ -1,33 +1,35 @@
 package com.example.demo.domain;
 
 import java.time.LocalDate;
+import java.util.HashSet;
+import java.util.Set;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "passenger")
+@Table(name = "passengers")
 public class Passenger extends BaseEntity {
   private String surname;
   private String name;
   private String lastName;
-  private LocalDate birth;
-  private Benefit[] benefit;
+  private LocalDate birthDate;
+  private Set<Benefit> benefits;
   private String login;
   private String password;
-  private Ticket[] tickets;
+  private Set<Ticket> tickets;
 
-  public Passenger(String surname, String name, String lastName, LocalDate birth, String login, String password) {
+  public Passenger(String surname, String name, String lastName, LocalDate birthDate, String login, String password) {
     this.surname = surname;
     this.name = name;
     this.lastName = lastName;
-    this.birth = birth;
+    this.birthDate = birthDate;
     this.login = login;
     this.password = password;
+    this.benefits = new HashSet<>();
   }
 
   protected Passenger() {}
@@ -47,15 +49,14 @@ public class Passenger extends BaseEntity {
     return lastName;
   }
 
-  @Column(name = "birth")
-  public LocalDate getBirth() {
-    return birth;
+  @Column(name = "birth_date")
+  public LocalDate getBirthDate() {
+    return birthDate;
   }
 
-  @ManyToOne
-  @JoinColumn(name = "benefit")
-  public Benefit[] getBenefit() {
-    return benefit;
+  @ManyToMany
+  public Set<Benefit> getBenefits() {
+    return benefits;
   }
 
   @Column(name = "login")
@@ -69,8 +70,7 @@ public class Passenger extends BaseEntity {
   }
 
   @OneToMany
-  @JoinColumn(name = "tickets")
-  public Ticket[] getTickets() {
+  public Set<Ticket> getTickets() {
     return tickets;
   }
 
@@ -86,12 +86,12 @@ public class Passenger extends BaseEntity {
     this.lastName = lastName;
   }
 
-  public void setBirth(LocalDate birth) {
-    this.birth = birth;
+  public void setBirthDate(LocalDate birth) {
+    this.birthDate = birth;
   }
 
-  public void setBenefit(Benefit[] benefit) {
-    this.benefit = benefit;
+  public void setBenefits(Set<Benefit> benefits) {
+    this.benefits = benefits;
   }
 
   public void setLogin(String login) {
@@ -102,7 +102,7 @@ public class Passenger extends BaseEntity {
     this.password = password;
   }
 
-  public void setTickets(Ticket[] tickets) {
+  public void setTickets(Set<Ticket> tickets) {
     this.tickets = tickets;
   }
 }

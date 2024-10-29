@@ -7,7 +7,7 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "ticket")
+@Table(name = "tickets")
 public class Ticket extends BaseEntity {
   private Passenger passenger;
   private Flight flight;
@@ -22,13 +22,13 @@ public class Ticket extends BaseEntity {
   protected Ticket() {}
 
   @ManyToOne
-  @JoinColumn(name = "passenger")
+  @JoinColumn(name = "passenger_id")
   public Passenger getPassenger() {
     return passenger;
   }
 
   @ManyToOne
-  @JoinColumn(name = "flight")
+  @JoinColumn(name = "flight_id")
   public Flight getFlight() {
     return flight;
   }

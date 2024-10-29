@@ -5,7 +5,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "airport")
+@Table(name = "airports")
 public class Airport extends BaseEntity{
   private String name;
   private String city;

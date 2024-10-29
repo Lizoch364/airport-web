@@ -1,6 +1,7 @@
 package com.example.demo.domain;
 
 import java.time.LocalDate;
+import java.util.Set;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -10,7 +11,7 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "flight")
+@Table(name = "flights")
 public class Flight extends BaseEntity {
   private String name;
   private LocalDate startDate;
@@ -18,7 +19,7 @@ public class Flight extends BaseEntity {
   private Airport departureAirport;
   private Airport arrivalAirport;
   private Airline airline;
-  private Ticket[] tickets;
+  private Set<Ticket> tickets;
 
   public Flight(String name, LocalDate startDate, LocalDate endDate, Airport departureAirport, Airport arrivalAirport, Airline airline) {
     this.name = name;
@@ -47,26 +48,25 @@ public class Flight extends BaseEntity {
   }
 
   @ManyToOne
-  @JoinColumn(name = "departure_airport")
+  @JoinColumn(name = "departure_airport_id")
   public Airport getDepartureAirport() {
     return departureAirport;
   }
 
   @ManyToOne
-  @JoinColumn(name = "arrival_airport")
+  @JoinColumn(name = "arrival_airport_id")
   public Airport getArrivalAirport() {
     return arrivalAirport;
   }
 
   @ManyToOne
-  @JoinColumn(name = "airline")
+  @JoinColumn(name = "airline_id")
   public Airline getAirline() {
     return airline;
   }
 
-  @OneToMany
-  @JoinColumn(name = "tickets")
-  public Ticket[] getTickets() {
+  @OneToMany(mappedBy = "flight")
+  public Set<Ticket> getTickets() {
     return tickets;
   }
 
@@ -94,7 +94,7 @@ public class Flight extends BaseEntity {
     this.airline = airline;
   }
 
-  public void setTickets(Ticket[] tickets) {
+  public void setTickets(Set<Ticket> tickets) {
     this.tickets = tickets;
   }
 }
